@@ -1,0 +1,47 @@
+﻿5.10.2018 v.1.0.0.0 
+- na test
+
+11.10.2018 v.1.0.0.2
+
+•	uprava multipickera (preklad vsetko + prestylovanie)
+•	uprava datetimepickera (ide na vsetkych browseroch), 
+•	disable expand buttonu, ak nie je vybrany assortment
+•	uprava dlzky nazvu dodavatela v tele tabulky a v nadpise
+•	Oprava chyby pri zobrazovani skrateneho nazvu dodavatela 
+	3 bodky sa pridavali aj v pripade, ak nazov dodavatela bol kratsi ako zadefinovany pocet znakov
+	pri hromadnej editacii dodavatela pre vsetky CS sa udaj o ocakavanom pocte znakov nacitaval z kodu a nie z parametra
+•	Oprava chyby pri zobrazeni strankovania cerpacich stanic -> pri vybere 5 riadkov sa zobrazi 5 CS. Pred opravou sa vzdy zobrazilo 10 CS
+•	skratenie nazvu dodavatela v hlavicke na 8 znakov
+•	zosuladenie lokalizacie chybovych hlasok s cennikom tovarov
+•	Doplnenie verzie aplikacie do paty aplikacie
+•	pridanie parametru PemLauncherUrl do web.config
+•	Oprava chyby pri vytvoreni a ulozeni assortmentu s rovnakym datumom ako uz existuje. Navypisovala sa chybova hlaska o tom.
+•	Oprava chyby pri mazani prazdneho stlpca, ak bol pridany este jeden stlpec a ten bol aj editovany. V takom pripade sa aplikacia spytala, ci chce uzivatel zmazat prazdny stlpec
+•	Oprava chyby pri editacii datumu 
+	Ak uzivatel zmenil datum priamo v editacnom okne, tak sa nezavolala sa ziadna akcia
+	ak chcel uzivatel zmenit len datum, tak sa datum neprepisal ale vratil sa povodny datum
+•	Oprava chyby pri filtrovani -> pri zmene filtra sa nevratil pohlad na prvu stranku ale zostal na aktualne zvolenej stranke
+
+v.1.0.1.0
+
+15.10.2018
+- oprava chyby prepisani dph/dodavatela/statusu na nulovu hodnotu. V takom pripade by sa mal assortment vymazat
+- do stlpca ActivePurchase sa zapisuje 1. Predtym sa zapisoval null
+- Oprava chyby pri nacitani neexistujuceho statusu alebo DPH triedy -> tabulka sa rozhadzala
+
+16.10.2018
+Oprava chyby v strankovani -> ak uzivatel zmenil pocet zaznamov alebo zrusil filter, tak ostal na povodnej stranke a nevratilo mu stranku ktora je prva v poradi
+Oprava chyby pri editacii datumu -> ak uzivatel zmenil datum a preklikol sa na iny tovar, tak aplikacia si nepamatala ze robil zmeny na datume a umoznila mu preklik
+Ak nie je ani jedna CS aktivna -> vypisovala sa chybova hlaska pri pridani noveho stlpca a bolo mozne pridat novy stlpec. Po uprave nie je mozne ziaden novy stlpec pridavat
+                               -> v zozname dodavatelov sa zobrazovali dodavatelia bez zohladnenia toho, ci je CS aktivna alebo nie
+18.10.2018
+Uprava akcii kontrolerov aby overovali ci ma uzivatel pravo zapisu alebo nie
+Dorobenie funckionality na editaciu podla typu tovaru 
+
+
+v. 1.0.1.1
+23.10.2018
+Oprava chyby pri zmene typu tovaru -> ak uzivatel neulozil nejaku zmenu a nasledne sa preklikol na iny typ tovaru, tak v session boli ulozene stare udaje o starom tovare
+Oprava chyby lokalizacie aktualnych definicii tovarov -> status sa nelokalizoval do miestnych jazykov
+
+		

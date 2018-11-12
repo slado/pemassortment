@@ -1,0 +1,7 @@
+﻿@using (Html.BeginForm("SetLang", null, FormMethod.Get, new { @class = "navbar-form navbar-right" }))
+    {
+    <input type="hidden" name="returnUrl" value="@Request.RawUrl" />
+    <input type="submit" name="lang" value="sk" class="btn btn-default" />
+    <input type="submit" name="lang" value="cs" class="btn btn-default" />
+    <input type="submit" name="lang" value="en" class="btn btn-default" />
+}

@@ -1,0 +1,38 @@
+Názov:           Posybe.EnterpriseManagement.Assortment
+Verzia:          1.0.1.1
+
+Poiadavky:       
+•	GoodsDB aktuálna verzia na produkènom prostredí 
+
+Umiestnenie:     \\FS3\Releases\HOS\PEM.Assortment\1.0.1.1
+
+Urèené pre:      HOS – všetky prostredia (Cz, Sk, Hu), prednostne pre Normbenz HU a Sk
+
+Postup nasadenia:
+•	Skopírova aplikáciu zo zdrojového adresára do cie¾ového adresára na IIS
+•	Inštalácia a nastavenie parametrov sú popísané v dokumente https://skdatapac.sharepoint.com/:w:/r/vyvoj/_layouts/15/Doc.aspx?sourcedoc=%7B78145DD5-313C-4346-8611-4F5820432394%7D&file=Implementacia%20-%20Assortment.docx&action=default&mobileredirect=true 
+
+Cie¾ové prostredie:        
+•	HOS – všetky prostredia (prednostne NORMSK a NORMHU)
+
+Zoznam zmien:
+•	oprava prekres¾ovania pickerov, ak bola zmena v editácia a následne klik na ïalšiu poloku 
+•	vyriešenie situácie, ak nastala editácia assortmenu a je pokus o zmenu typu tovaru
+o	 oprava ukladania datasetu v backende
+o	 oprava frontendu – test pred zmenou tovaru, èi bola editácia assortmentu. Ak áno zobrazenie modálneho okna s otázkou ako to vyrieši
+•	oprava lokalizácie statusu posielaného do viewmodelu a zobrazovaného v aktuálnom (zelenom ståpci), alebo pri roliach len Read vo všetkıch ståpcoch
+
+
+Testovacie scenáre:
+•	urobi editáciu assortmentu nejakého tovaru
+o	 kliknú na ïalšiu poloku v ¾avej tabu¾ke
+o	 zobrazí sa modálne okno, ako rieši túto situáciu (návrat k editácii, alebo zrušenie zmien a zobrazenie assortmentu poloky, na ktorú bolo kliknuté)
+o	 Skontrolova - pickery musia zosta v kaom prípade prekreslené  bootstrapovım štılom (nesmú sa zmeni-strati štılovanie)
+•	urobi editáciu assortmentu nejakého tovaru
+o	 zmeni typ tovaru pomocou pickeru nad tabu¾kou v ¾avej èasti obrazovky
+o	 zobrazí sa modálne okno, ako rieši túto situáciu (pokraèovanie v editácii, alebo zrušenie zmien)
+o	 Skontrolova, èi aplikácia správne reaguje:
+?	pokraèovanie v editácii - neprepne sa typ tovaru (fuel/shop) vráti sa k editácii rozpracovaného assortmentu
+?	zruši zmeny – rozpracovaná editácia sa neuloí, prepne sa typ tovaru a zobrazí sa zoznam poloiek prepnutého typu tovaru (fuel/shop)
+•	prepnú postupne všetky podporované jazyky a s kontrolova, èi je v aktuálnom ståpci (zelenı) správne lokalizovanı Status
+•	testovaciemu uívate¾ovi odobra role so suffixom Read, skontrolova aktuálny a aj do budúcna platnı assortment, èi má správne lokalizovanı Status

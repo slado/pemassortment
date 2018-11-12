@@ -1,0 +1,67 @@
+﻿@using Datapac.Posybe.EnterpriseManagement.Asrt.Web.Localization
+
+@{
+    string lang = LangHelper.GetCurrentNeutralCulture();
+    LangHelper.GetCurrentCulture();
+
+    string fileVersion = "";
+    if (ViewBag.FileVersion != null)
+    {
+        fileVersion = "– ver. " + ViewBag.FileVersion;
+    }
+
+    //Name of controler and action - now not necessery 
+    string controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    string action = HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString();
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <meta name="description" content="The description of my page" />
+</head>
+<body>
+
+    @Html.Partial("_MainMenu")
+
+    <div class="body-content wrapper">
+        @RenderBody()
+        <div class="push"></div>
+    </div>
+    <div class="footer">
+        <p>&copy; @DateTime.Now.Year &nbsp; Datapac – Posybe Enterprise Management - Assortment @fileVersion</p>
+    </div>
+
+    <!-- This scripts must be first before on my all users scripts -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/toastr")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/knockoutAndHelper")
+
+    <script type="text/javascript">
+        @*Set global prefix for applications*@
+        Global.Variable.urlPrefix = '@Url.Content("~")';
+
+        @*Setting global variables*@
+        Global.Variable.LangForDateTimePicker = '@Langs.LangDateTimePicker';
+        Global.Variable.DateTimeFormat = "DD.MM.YYYY HH:mm:ss";
+        
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+﻿@using Datapac.Posybe.EnterpriseManagement.Web.Localization
+@using Datapac.Posybe.EnterpriseManagement.Web.Areas.Admin.ViewModels
+
+
+@model Datapac.Posybe.EnterpriseManagement.Web.Areas.Admin.ViewModels.UserAndRoles
+
+@{
+    ViewBag.Title = ((int)ViewBag.OperationUser == (int)OperationUser.Update) ? Langs.title_UpdateUser : Langs.title_CreateUser;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal fade" id="modalApplySave" role="dialog"></div>
+<div class="row" style="padding-bottom:20px;">
+    <div class="col-md-offset-2 col-md-8">
+
+        @if ((int)ViewBag.OperationUser == (int)OperationUser.Update)
+        {<h3><span id="operationId"> @LangHelper.GetLocString("title_UpdateUser")</span></h3>}
+        @if ((int)ViewBag.OperationUser == (int)OperationUser.Create)
+        {<h3><span id="operationId"> @LangHelper.GetLocString("title_CreateUser")</span></h3>}
+        <hr />
+        <div class="form-group row">
+            <label class="control-label col-md-2">@LangHelper.GetLocString("UserName")</label>
+            <div class="col-md-10">
+                @if ((int)ViewBag.OperationUser == (int)OperationUser.Update)
+            {
+                    <input data-bind="textInput: userDetail.userName" readonly="readonly" class="form-control text-box single-line disabled" type="text" />
+                }
+                @if ((int)ViewBag.OperationUser == (int)OperationUser.Create)
+            {
+                    <input id="userName" data-bind="textInput: userDetail.userName" class="form-control text-box single-line" type="text" />
+                    <p id="ExistUser" hidden="hidden" class="bg-success" style="max-width:280px; margin-top:7px; padding: 5px;">@LangHelper.GetLocString("msg_UserExist")</p>
+                    <p id="ErrorUser" hidden="hidden" class="bg-danger" style="max-width:280px; margin-top:7px; padding: 5px;">@LangHelper.GetLocString("msg_NameMustPresent")</p>
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">@LangHelper.GetLocString("SetPassword")</label>
+            <div class="col-md-10">
+                @if ((int)ViewBag.OperationUser == (int)OperationUser.Update)
+            {
+                    <div class="pull-left">
+                        <input readonly="readonly" data-bind="textInput: userDetail.setPassword" class="form-control text-box single-line" type="text" style="width:280px;" />
+                    </div>
+                    <input type="submit" value="@LangHelper.GetLocString("btn_GeneratePassword")" class="btn btn-primary single-line pull-left disabled" style="margin-left: 10px;" />
+                }
+                @if ((int)ViewBag.OperationUser == (int)OperationUser.Create)
+            {
+                    <div class="pull-left">
+                        <input id="setPassword" data-bind="textInput: userDetail.setPassword" class="form-control text-box single-line" type="text" style="width:280px;" />
+                        <p id="ErrorPassword" hidden="hidden" class="bg-danger" style="max-width:280px; margin-top:7px; padding: 5px;">@LangHelper.GetLocString("msg_PasswordMustPresent")</p>
+                    </div>
+                    <input type="submit" value="@LangHelper.GetLocString("btn_GeneratePassword")" id="btn_gen_Password" class="btn btn-primary single-line pull-left" style="margin-left: 10px;" />
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">@LangHelper.GetLocString("UserEmail")</label>
+            <div class="col-md-10">
+                <input id="email" data-bind="textInput: userDetail.email" class="form-control text-box single-line" type="text" />
+                <p id="errorEmail" hidden="hidden" class="bg-danger" style="max-width:280px; margin-top:7px; padding: 5px;">@LangHelper.GetLocString("msg_EmailNotRequiredFormat")</p>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-md-2">@LangHelper.GetLocString("UserComment")</label>
+            <div class="col-md-10">
+                <input data-bind="textInput: userDetail.comment" class="form-control text-box single-line" type="text" />
+            </div>
+        </div>
+
+
+        <table id="tableofUserRights" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td class="table-header-bold">@LangHelper.GetLocString("UserListRoles")</td>
+                    <td align="center" class="table-header-bold">@LangHelper.GetLocString("PresentRole")</td>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: userDetail.pemRoles">
+                <tr>
+                    <td data-bind="text: roleName"></td>
+                    <td align="center">
+                        <input type="checkbox" data-bind="checked: rolePresent, attr:{id: roleName}" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p id="ErrorRoles" hidden="hidden" class="bg-danger" style="margin-top:7px; padding: 5px;">@LangHelper.GetLocString("msg_AtLeastOneRoleMustPresent")</p>
+
+        <div class="form-group">
+            <div class="pull-right">
+                <input type="button" id="btn_Save" data-bind="click: updateUser" value="@LangHelper.GetLocString("btn_SaveUserChanges")" data-toggle="modal" class="btn btn-success" />
+            </div>
+            <div class="pull-right" style="margin-right:10px;">
+                @Html.ActionLink(@LangHelper.GetLocString("btn_BackToListUsers"), "Users", null, new { @class = "btn btn-default", @id="returToUserList" })
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Hidden("RedirectTo", Url.Action("Users", "Admin"));
+
+@section Scripts {
+    @Scripts.Render(
+    "~/Scripts/ViewModels/Admin/UserRolesViewModel.js"
+    )
+
+    <script>
+        var viewModel = new UserRolesViewModel(@Html.HtmlConvertToJson(Model),'User');
+        ko.applyBindings(viewModel);
+    </script>
+}

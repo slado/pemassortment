@@ -1,0 +1,85 @@
+﻿@model Datapac.Posybe.EnterpriseManagement.Web.Areas.Admin.Controllers.ImportCompetitorsItemsToImport
+
+@{
+    ViewBag.Title = "ImportCompetitorsResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    /* aj s najomnikmi (tenants)
+    string vysledok = (Model.CompetitorsToFsCsvPathCreateStatus && Model.CompetitorsCsvPathCreateStatus && Model.EmailsToFsCsVpathCreateStatus && Model.UsersRightsToFsCsvPathCreateStatus && Model.TenantsRightsToFsCsvPathCreateStatus) ?
+                    "Import všetkých položiek kompetitorov bol úspešný" : "Import nebol úspešný, skontrolujte log !!!";
+    string vysledokClass = (Model.CompetitorsToFsCsvPathCreateStatus && Model.CompetitorsCsvPathCreateStatus && Model.EmailsToFsCsVpathCreateStatus && Model.UsersRightsToFsCsvPathCreateStatus && Model.TenantsRightsToFsCsvPathCreateStatus) ?
+                            "competitor-edit-text-green" : "competitor-edit-text-red";
+                            */
+    string vysledok = (Model.CompetitorsToFsCsvPathCreateStatus && Model.CompetitorsCsvPathCreateStatus && Model.EmailsToFsCsVpathCreateStatus && Model.UsersRightsToFsCsvPathCreateStatus) ?
+                            "Import všetkých položiek kompetitorov bol úspešný" : "Import nebol úspešný, skontrolujte log !!!";
+    string vysledokClass = (Model.CompetitorsToFsCsvPathCreateStatus && Model.CompetitorsCsvPathCreateStatus && Model.EmailsToFsCsVpathCreateStatus && Model.UsersRightsToFsCsvPathCreateStatus) ?
+                            "competitor-edit-text-green" : "competitor-edit-text-red";
+
+}
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-lg-offset-3 col-md-offset-3">
+        <h2>Výsledok importu </h2>
+        <table class="table table-striped">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.CompetitorsCsvPathCreateStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CompetitorsCsvPathCreateStatus)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.CompetitorsToFsCsvPathCreateStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.CompetitorsToFsCsvPathCreateStatus)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.UsersCsvPathCreateStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.UsersCsvPathCreateStatus)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.UsersRightsToFsCsvPathCreateStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.UsersRightsToFsCsvPathCreateStatus)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.EmailsToFsCsVpathCreateStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.EmailsToFsCsVpathCreateStatus)
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.TenantsRightsToFsCsvPathCreateStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.TenantsRightsToFsCsvPathCreateStatus)
+                </td>
+            </tr>
+        </table>
+        <h3 class="@vysledokClass">
+            @vysledok
+        </h3>
+        <div class="form-group">
+            @Html.ActionLink("Zobraz Aktualny log", "ShowLogFile", "Admin", new { area = "Admin" }, new { @class = "btn btn-default btn-success" })
+        </div>
+    </div>
+</div>
