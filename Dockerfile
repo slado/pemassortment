@@ -1,4 +1,5 @@
-FROM microsoft/iis
+#FROM microsoft/iis
+FROM microsoft/aspnet:4.7.2
 
 #remove old content
 RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
