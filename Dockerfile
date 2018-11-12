@@ -9,7 +9,10 @@ WORKDIR /inetpub/wwwroot
 #copy application
 COPY PEM.Assortment/ .
 
-#EXPOSE 8888
+#copy configuration
+COPY web.config .
+
+EXPOSE 8002
 #WORKDIR /app/PEM.SiteGroups
 #ENTRYPOINT ["dotnet", "PEM.Configuration.SiteGroups.dll"]
 #RUN ["cmd ", "/c dir /s"]
