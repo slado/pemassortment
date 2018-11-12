@@ -1,0 +1,1 @@
+docker stom pemassortment-container
