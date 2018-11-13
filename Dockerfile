@@ -12,7 +12,7 @@ RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Ne
 RUN Install-PackageProvider -Name chocolatey -Force
 
 #install DacFramework
-RUN choco install sql2017-dacframework
+RUN choco install sql2017-dacframework -y
 
 # Create app directory
 WORKDIR /inetpub/wwwroot
