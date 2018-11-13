@@ -1,8 +1,18 @@
 #FROM microsoft/iis
 FROM microsoft/aspnet:4.7.2
 
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
+
 #remove old content
 RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
+
+#install chocolatey
+WORKDIR /tools
+RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+RUN Install-PackageProvider -Name chocolatey -Force
+
+#install DacFramework
+RUN choco install sql2017-dacframework
 
 # Create app directory
 WORKDIR /inetpub/wwwroot
