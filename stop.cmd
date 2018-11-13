@@ -1,1 +1,1 @@
-docker stom pemassortment-container
+docker stop pemassortment-container
