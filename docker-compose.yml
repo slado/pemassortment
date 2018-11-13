@@ -1,0 +1,39 @@
+################################################################################
+#
+# title : Docker compose for Posybe HOS app and database
+#
+# author: Roman Sladek
+#
+# url   :  
+#
+#
+# - pemassortment - example posybe HOS app container
+#
+# - mssql-win-express
+#   SQL Server express (windows image) 
+#
+# to run: docker-compose
+#
+################################################################################
+version: "3.3"
+services:
+    posybeapp:
+        build: .
+        image: slado/pemassortment
+        container_name: pemassortment-container
+        ports: ["8080:80"]
+        links:
+            - "sqlserver:database"
+ 
+    sqlserver:
+        image: microsoft/mssql-server-windows-express
+        container_name: mssql-win-express
+        ports: ["1433:1433"]
+        environment:
+            sa_password: SunkaFl4ky
+            accept_eula: Y
+        networks:
+            default:
+                aliases:
+                    - db
+ 

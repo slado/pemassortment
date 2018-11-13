@@ -12,7 +12,7 @@ RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Ne
 RUN Install-PackageProvider -Name chocolatey -Force
 
 #install DacFramework
-RUN choco install sql2017-dacframework -y
+RUN choco install sql2017-dacframework --yes
 
 # Create app directory
 WORKDIR /inetpub/wwwroot
@@ -22,6 +22,14 @@ COPY PEM.Assortment/ .
 
 #copy configuration
 COPY web.config .
+
+#deploy databases
+WORKDIR /databases
+COPY GoodsDB.bacpac .
+COPY UIM.bacpac .
+
+RUN "'C:\Program Files\Microsoft SQL Server\140\DAC\bin\sqlpackage.exe /Action:Import /tsn:tcp:db,1433 /tdn:GoodsDB /tu:sa /tp:SunkaFl4ky /sf:GoodsDB.bacpac /p:Storage=File'"
+RUN "'C:\Program Files\Microsoft SQL Server\140\DAC\bin\sqlpackage.exe /Action:Import /tsn:tcp:db,1433 /tdn:UIM /tu:sa /tp:SunkaFl4ky /sf:UIM.bacpac /p:Storage=File'"
 
 EXPOSE 8002
 #WORKDIR /app/PEM.SiteGroups
