@@ -6,6 +6,20 @@ docker exec -ti pemassortment-container powershell
 #IP assortment kontaineru z compose
 docker inspect -f "{{ .NetworkSettings.Networks.pemassortment_default.IPAddress }}" pemassortment-container
 ```
+# Chocolatey
+Package manager pre windows. Instalacia v dockeri
+```
+RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+RUN Install-PackageProvider -Name chocolatey -Force
+
+```
+
+# ftp downloader
+Pouzil som duck, instalovany cez chocolatey
+```
+choco install duck -y
+duck -d ftp://sk0050p/releases/bos/fcviewer/ .\
+```
 
 # Links
 [Creating A Docker Containerised Environment For SQL Server and Continuous Integration](https://chrisadkin.io/2017/10/19/creating-a-docker-containerised-environment-for-sql-server-and-continuous-integration/)
