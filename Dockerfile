@@ -6,13 +6,14 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
 #remove old content
 RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
 
+#DacFramework is not needed anymore. That's why the tools are not installed at all
 #install chocolatey
-WORKDIR /tools
-RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-RUN Install-PackageProvider -Name chocolatey -Force
+#WORKDIR /tools
+#RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+#RUN Install-PackageProvider -Name chocolatey -Force
 
 #install DacFramework
-RUN choco install sql2017-dacframework --yes
+#RUN choco install sql2017-dacframework --yes
 
 # Create app directory
 WORKDIR /inetpub/wwwroot

@@ -1,7 +1,10 @@
 # connect to running docker container
-```
+```powershell
 docker exec -ti pemassortment-container cmd 
 docker exec -ti pemassortment-container powershell
+
+#IP assortment kontaineru z compose
+docker inspect -f "{{ .NetworkSettings.Networks.pemassortment_default.IPAddress }}" pemassortment-container
 ```
 
 # Links

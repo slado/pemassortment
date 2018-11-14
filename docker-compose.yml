@@ -34,8 +34,7 @@ services:
         environment:
             sa_password: SunkaFl4ky
             accept_eula: Y
-            attach_dbs: "[{dbname: 'UIM', dbfiles: ['c:\\\\temp\\\\uim.mdf','c:\\\\temp\\\\uim.ldf']}]"
-            attach_dbs: "[{dbname: 'GoodsDB', dbfiles: ['c:\\\\temp\\\\GoodsDB_LM_Data.mdf','c:\\\\temp\\\\GoodsDB_LM_Log.ldf']}]"
+            attach_dbs: "[{dbname: 'UIM', dbfiles: ['c:\\\\temp\\\\uim.mdf','c:\\\\temp\\\\uim.ldf']}, {dbname: 'GoodsDB', dbfiles: ['c:\\\\temp\\\\GoodsDB_LM_Data.mdf','c:\\\\temp\\\\GoodsDB_LM_Log.ldf']}]"            
         networks:
             default:
                 aliases:
