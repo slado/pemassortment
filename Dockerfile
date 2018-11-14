@@ -24,12 +24,12 @@ COPY PEM.Assortment/ .
 COPY web.config .
 
 #deploy databases
-WORKDIR /databases
-COPY GoodsDB.bacpac .
-COPY UIM.bacpac .
+#WORKDIR /databases
+#COPY GoodsDB.bacpac .
+#COPY UIM.bacpac .
 
-RUN "'C:\Program Files\Microsoft SQL Server\140\DAC\bin\sqlpackage.exe /Action:Import /tsn:tcp:db,1433 /tdn:GoodsDB /tu:sa /tp:SunkaFl4ky /sf:GoodsDB.bacpac /p:Storage=File'"
-RUN "'C:\Program Files\Microsoft SQL Server\140\DAC\bin\sqlpackage.exe /Action:Import /tsn:tcp:db,1433 /tdn:UIM /tu:sa /tp:SunkaFl4ky /sf:UIM.bacpac /p:Storage=File'"
+#RUN "'C:\Program Files\Microsoft SQL Server\140\DAC\bin\sqlpackage.exe /Action:Import /tsn:tcp:db,14331 /tdn:GoodsDB /tu:sa /tp:SunkaFl4ky /sf:GoodsDB.bacpac'"
+#RUN "'C:\Program Files\Microsoft SQL Server\140\DAC\bin\sqlpackage.exe /Action:Import /tsn:tcp:db,14331 /tdn:UIM /tu:sa /tp:SunkaFl4ky /sf:UIM.bacpac'"
 
 EXPOSE 8002
 #WORKDIR /app/PEM.SiteGroups
