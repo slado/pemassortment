@@ -4,7 +4,7 @@ REM robocopy /r:0 \\10.10.1.199\t$\temp\ . GoodsDB.bacpac
 REM robocopy /r:0 \\10.10.1.199\t$\temp\ . UIM.bacpac
 
 
-docker build -t slado/pemassortment:latest --build-arg ver=1.1.0.1 .
+"C:\Program Files\Docker\Docker\resources\bin\docker" build -t slado/pemassortment:latest --build-arg ver=1.1.0.1 .
 rem docker build -t slado/pemassortment:latest .
 
 
