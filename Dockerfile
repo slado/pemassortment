@@ -22,7 +22,7 @@ RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
 
 #download packages
 WORKDIR /package 
-RUN wget -OutFile PEM.Assortment.zip http://sk0050p.datapac.local:5000/api/components/PEM.Assortment/1.1.0.1
+RUN wget -OutFile PEM.Assortment.zip http://sk0050p.datapac.local:5000/api/components/PEM.Assortment/1.0.1.1
 
 #expand packages
 RUN Expand-Archive PEM.Assortment.zip /inetpub/wwwroot
