@@ -24,7 +24,6 @@ services:
         ports: ["8080:80"]
         links:
             - "sqlserver:database"
- 
     sqlserver:
         image: microsoft/mssql-server-windows-express
         container_name: mssql-win-express

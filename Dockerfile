@@ -1,7 +1,11 @@
-#FROM microsoft/iis
 FROM microsoft/aspnet:4.7.2
-
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
+
+#ARG VER
+#ENV VVER $VER
+#RUN ["powershell", "echo", "[Environment]::GetEnvironmentVariable('VVER')"]
+#RUN echo %VVER%
+
 
 #remove old content
 RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
@@ -12,14 +16,23 @@ RUN powershell -NoProfile -Command Remove-Item -Recurse C:\inetpub\wwwroot\*
 #RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 #RUN Install-PackageProvider -Name chocolatey -Force
 
-#install DacFramework
-#RUN choco install sql2017-dacframework --yes
+#install wget
+#RUN choco install --yes wget
+
+
+#download packages
+WORKDIR /package 
+RUN wget -OutFile PEM.Assortment.zip http://sk0050p.datapac.local:5000/api/components/PEM.Assortment/1.1.0.1
+
+#expand packages
+RUN Expand-Archive PEM.Assortment.zip /inetpub/wwwroot
 
 # Create app directory
 WORKDIR /inetpub/wwwroot
 
+
 #copy application
-COPY PEM.Assortment/ .
+#COPY PEM.Assortment/ .
 
 #copy configuration
 COPY web.config .
